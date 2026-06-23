@@ -1,0 +1,56 @@
+{
+  "features_ordem": [
+    "startingAirport",
+    "destinationAirport",
+    "segmentsAirlineCode",
+    "segmentsCabinCode",
+    "segmentsEquipmentDescription",
+    "searchMonth",
+    "searchDay",
+    "flightMonth",
+    "flightDay",
+    "seatsRemaining",
+    "totalTravelDistance",
+    "segmentsDurationInSeconds",
+    "segmentsDepartureTimeEpochSeconds",
+    "segmentsArrivalTimeEpochSeconds",
+    "isBasicEconomy",
+    "isRefundable"
+  ],
+  "categorical": [
+    "startingAirport",
+    "destinationAirport",
+    "segmentsAirlineCode",
+    "segmentsCabinCode",
+    "segmentsEquipmentDescription"
+  ],
+  "numerical": [
+    "searchMonth",
+    "searchDay",
+    "flightMonth",
+    "flightDay",
+    "seatsRemaining",
+    "totalTravelDistance",
+    "segmentsDurationInSeconds",
+    "segmentsDepartureTimeEpochSeconds",
+    "segmentsArrivalTimeEpochSeconds"
+  ],
+  "binary": [
+    "isBasicEconomy",
+    "isRefundable"
+  ],
+  "target": "baseFare",
+  "best_model": "Random Forest",
+  "metricas_replicacao": {
+    "r2": 0.7641,
+    "rmse": 74.47,
+    "mae": 46.74
+  },
+  "metricas_paper": {
+    "r2": 0.728,
+    "rmse": 79.92
+  },
+  "dataset": "Expedia/dilwong- non-stop, amostra 10%",
+  "split": "70/30",
+  "nota_fase2": "Aplicar ao dataset BTS usando features equivalentes: startingAirport->ORIGIN, destinationAirport->DEST, segmentsAirlineCode->AIRLINE_CODE, flightMonth->mes do FL_DATE, totalTravelDistance->DISTANCE"
+}
