@@ -95,7 +95,7 @@ Os notebooks devem ser executados na seguinte sequência. Os datasets necessári
 | 3b | `architecture_implementation/with_external_features/notebook_3b.ipynb` | Resultados Fase 3b + figuras |
 | 4 | `sensivity_analysis/sensitivity_analysis.ipynb` | Resultados de sensibilidade |
 | 5 | `export_final_model/final_model_export.ipynb` | `prediction_model.joblib` |
-| 6 | `export_final_model/predict_flight.py` | Utiizada pela otimização
+| 6 | `export_final_model/predict_flight.py` | Utilizada pela otimização
 
 ---
 
