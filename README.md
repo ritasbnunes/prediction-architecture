@@ -143,12 +143,4 @@ Os dados climáticos (temperatura, precipitação, vento) são descarregados aut
 O ficheiro `export_final_model/predict_flight.py` expõe a classe `EcoFusionPredictor`,
 usada pelo módulo de otimização para obter previsões de custo, duração e CO₂ de rotas.
 
-\`\`\`python
-from predict_flight import EcoFusionPredictor
-
-predictor = EcoFusionPredictor("prediction_model.joblib")
-resultado = predictor.predict_flight(dados_da_rota)
-# resultado = {"cost": ..., "duration": ..., "co2": ...}
-\`\`\`
-
 As colunas obrigatórias do input estão documentadas em `REQUIRED_COLUMNS` dentro do próprio script.
