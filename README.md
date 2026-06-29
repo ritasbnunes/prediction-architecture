@@ -74,7 +74,7 @@ Contém também `generate_new_dataset.ipynb`, que enriquece o dataset base com f
 Análise de sensibilidade one-at-a-time sobre a Fase 3b. Testa 7 configurações variando o `alpha` do Ridge (0,1 e 10,0), o `n_estimators` do RF (50 e 200) e o limiar de Pearson (0,01 e 0,05). Conclui que a arquitetura é robusta ao custo e à duração; o CO₂ é o target mais sensível.
 
 ### `export_final_model/`
-Exporta o modelo completo da Fase 3b para um ficheiro `prediction_model.joblib` através da classe `EcoFusionPredictor`. O predictor encapsula os scalers, encoders, modelos de Nível 0 (treinados com todo o histórico) e os Ridge de Nível 1 (calibrados com OOF), prontos para receber um `DataFrame` com novos voos.
+Exporta o modelo completo da Fase 3b para um ficheiro `prediction_model.joblib` através da classe `EcoFusionPredictor`. O predictor encapsula os scalers, encoders, modelos de Nível 0 (treinados com todo o histórico) e os Ridge de Nível 1 (calibrados com OOF), prontos para receber um `DataFrame` com novos voos. Inclui também predict_flight.py, que expõe a classe EcoFusionPredictor como interface de produção: carrega o .joblib uma única vez e disponibiliza os métodos `predict_flight()` e `predict_flights()` para integração direta com o módulo de otimização.
 
 ---
 
@@ -95,6 +95,7 @@ Os notebooks devem ser executados na seguinte sequência. Os datasets necessári
 | 3b | `architecture_implementation/with_external_features/notebook_3b.ipynb` | Resultados Fase 3b + figuras |
 | 4 | `sensivity_analysis/sensitivity_analysis.ipynb` | Resultados de sensibilidade |
 | 5 | `export_final_model/final_model_export.ipynb` | `prediction_model.joblib` |
+| 6 | `export_final_model/predict_flight.py` | Utiizada pela otimização
 
 ---
 
@@ -134,3 +135,20 @@ Os dados climáticos (temperatura, precipitação, vento) são descarregados aut
 | CO₂ (kg) | 95,95 | 99,995% | Fórmula ICAO (validação física) |
 
 *os RMSE não são diretamente comparáveis.
+
+--- 
+
+## Integração com o módulo de otimização
+
+O ficheiro `export_final_model/predict_flight.py` expõe a classe `EcoFusionPredictor`,
+usada pelo módulo de otimização para obter previsões de custo, duração e CO₂ de rotas.
+
+\`\`\`python
+from predict_flight import EcoFusionPredictor
+
+predictor = EcoFusionPredictor("prediction_model.joblib")
+resultado = predictor.predict_flight(dados_da_rota)
+# resultado = {"cost": ..., "duration": ..., "co2": ...}
+\`\`\`
+
+As colunas obrigatórias do input estão documentadas em `REQUIRED_COLUMNS` dentro do próprio script.
